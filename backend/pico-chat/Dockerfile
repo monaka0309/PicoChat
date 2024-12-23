@@ -1,8 +1,4 @@
 FROM maven:3.8-openjdk-17 AS builder
-RUN apt-get update && apt-get install -y \
-    curl \
-    maven \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
 WORKDIR /PicoChat
 COPY ./pom.xml ./pom.xml
 COPY ./src ./src
