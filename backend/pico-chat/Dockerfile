@@ -1,14 +1,8 @@
-# FROM openjdk:17-jdk-slim
-# RUN apt-get update && apt-get install -y \
-#     curl \
-#     maven \
-#     && apt-get clean && rm -rf /var/lib/apt/lists/*
-# WORKDIR /app
-# COPY . .
-# RUN mvn clean package -DskipTests
-# ENTRYPOINT ["java", "-jar", "target/pico-chat.jar"]
-
 FROM maven:3.8-openjdk-17 AS builder
+RUN apt-get update && apt-get install -y \
+    curl \
+    maven \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 WORKDIR /PicoChat
 COPY ./pom.xml ./pom.xml
 COPY ./src ./src
