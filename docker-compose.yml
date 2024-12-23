@@ -1,11 +1,11 @@
 version: '3.8'
 
 services:
-  app:
+  backend:
     build:
       context: ./backend/pico-chat
       dockerfile: Dockerfile
-    container_name: pico-chat-app-container
+    container_name: pico-chat-backend-container
     ports:
       - 8080:8080
     depends_on:
@@ -15,6 +15,23 @@ services:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_URL=jdbc:postgresql://db:5432/pico-chat
     platform: linux/amd64
+
+  frontend:
+    build:
+      context: ./frontend/pico-chat
+      dockerfile: Dockerfile
+    container_name: pico-chat-frontend-container
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend/pico-chat:/app
+      - /app/node_modules
+    command: sh -c "yarn dev"
+    depends_on:
+      - backend
+    environment:
+      - NEXT_PUBLIC_API_URL=http://backend:8080/api
+
   db:
     image: postgres:15
     container_name: pico-chat-db-container
@@ -27,5 +44,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: pico-chat
+
 volumes:
   db-store:
+  node_modules:
