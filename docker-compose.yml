@@ -20,7 +20,6 @@ services:
     build:
       context: ./frontend/pico-chat
       dockerfile: Dockerfile
-      target: development
     container_name: pico-chat-frontend-container
     ports:
       - 3000:3000
