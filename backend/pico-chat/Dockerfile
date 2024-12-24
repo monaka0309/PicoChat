@@ -9,3 +9,5 @@ WORKDIR /app
 COPY --from=builder /PicoChat/target/pico-chat.jar ./pico-chat.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "/app/pico-chat.jar"]
+
+
