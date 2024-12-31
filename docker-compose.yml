@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   backend:
     build:
@@ -14,7 +12,12 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_URL=jdbc:postgresql://db:5432/pico-chat
+    volumes:
+      - ./backend/pico-chat/src:/app/backend/pico-chat/src
+      - ./backend/pico-chat/target/classes/:/app/backend/pico-chat/target/classes
+      - ./pom.xml:/app/pom.xml
     platform: linux/amd64
+
 
   frontend:
     build:

@@ -8,7 +8,7 @@ public class ChatController {
 
     @GetMapping("/")
     public String home() {
-        return "Hello, RestController! jsonファイルが飛んでるよ。";
+        return "Hello, RestController! jsonファイルが飛んでるよね~~";
     }
 }
 
